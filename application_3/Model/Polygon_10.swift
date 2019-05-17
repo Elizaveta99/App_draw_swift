@@ -11,19 +11,17 @@ import UIKit
 @IBDesignable class Polygon_10: UIView {
     
     override func draw(_ rect: CGRect) {
+        let width = bounds.size.width
+        let height = bounds.size.height
+        let size = min (width, height)
         
-        //rectangle
-        let width = bounds.size.width/3.0 - 40.0
-        let height = bounds.size.height - 40.0
-        let size = max (min (width, height), 150.0)
-        let rect = CGRect(x: 40.0, y: bounds.midY - 300, width: size, height: size)
+        let rect = CGRect(x: 0.0, y: 0.0, width: size, height: size)
         
-        //let rect = getRectangle()
         let path = UIBezierPath()
         
         let x = rect.midX
-        let y = rect.midY + 230 // ??
-        let r:CGFloat = 80 //??
+        let y = rect.midY
+        let r:CGFloat = 80
         let angle = 2 * CGFloat(Double.pi) / CGFloat(10)
         var points = [CGPoint]()
         for i in 0...10 {
@@ -38,27 +36,27 @@ import UIKit
             path.addLine(to: CGPoint(x: i.x, y: i.y))
         }
         
-        let shape = CAShapeLayer()
-        shape.path = path.cgPath
-        shape.strokeColor = UIColor.blue.cgColor
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = UIColor.blue.cgColor
         
-        let gradient = CAGradientLayer()
-        gradient.frame = path.bounds
-        gradient.bounds = path.bounds
-        gradient.colors = [UIColor.green.cgColor, UIColor.yellow.cgColor]
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = path.bounds
+        gradientLayer.bounds = path.bounds
+        gradientLayer.colors = [UIColor.green.cgColor, UIColor.yellow.cgColor]
         let shapeMask = CAShapeLayer()
         shapeMask.path = path.cgPath
-        gradient.mask = shapeMask
+        gradientLayer.mask = shapeMask
         
         let shadowLayer = CALayer()
         shadowLayer.shadowColor = UIColor.black.cgColor
         shadowLayer.shadowOffset = CGSize.zero
-        shadowLayer.shadowRadius = 10.0
+        shadowLayer.shadowRadius = 15.0
         shadowLayer.shadowOpacity = 0.8
         shadowLayer.backgroundColor = UIColor.clear.cgColor
         
-        shadowLayer.insertSublayer(shape, at: 0)
-        shadowLayer.insertSublayer(gradient, at: 1)
+        shadowLayer.insertSublayer(shapeLayer, at: 0)
+        shadowLayer.insertSublayer(gradientLayer, at: 1)
         self.layer.addSublayer(shadowLayer)
     }
 }

@@ -12,33 +12,33 @@ import UIKit
     
     override func draw(_ rect: CGRect) {
         
-        //rectangle
-        let width = bounds.size.width/3.0 - 40.0
-        let height = bounds.size.height - 40.0
-        let size = max (min (width, height), 150.0)
-        let rect = CGRect(x: 50.0, y: bounds.minY, width: size, height: size)
+        let width = bounds.size.width
+        let height = bounds.size.height
+        let size = min (width, height)
+        
+        let rect = CGRect(x: 0.0, y: 0.0, width: size, height: size)
         
         let path = UIBezierPath()
-        let center = CGPoint(x:rect.midX, y: rect.midY - 55.0)
+        let center = CGPoint(x:rect.midX - 70.0, y: rect.midY - 70.0)
         
         path.move(to: center)
-        path.addLine(to: CGPoint(x:rect.midX + 110, y: rect.midY - 55.0))
-        path.addLine(to: CGPoint(x:rect.midX + 35, y: rect.midY - 55.0 + sqrt(1600.0-35*35)))
+        path.addLine(to: CGPoint(x:rect.midX + 130.0, y: rect.midY - 100.0))
+        path.addLine(to: CGPoint(x:rect.midX + 35.0, y: rect.midY - 55.0 + sqrt(1600.0-35.0*35.0)))
         path.close()
         
         let shadowLayer = CALayer()
         shadowLayer.shadowColor = UIColor.black.cgColor
         shadowLayer.shadowOffset = CGSize.zero
-        shadowLayer.shadowRadius = 10.0
+        shadowLayer.shadowRadius = 15.0
         shadowLayer.shadowOpacity = 0.8
         shadowLayer.backgroundColor = UIColor.clear.cgColor
         
-        let shape = CAShapeLayer()
-        shape.path = path.cgPath
-        shape.strokeColor = UIColor.green.cgColor
-        shape.fillColor = UIColor.yellow.cgColor
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = UIColor.green.cgColor
+        shapeLayer.fillColor = UIColor.yellow.cgColor
         
-        shadowLayer.insertSublayer(shape, at: 0)
+        shadowLayer.insertSublayer(shapeLayer, at: 0)
         self.layer.addSublayer(shadowLayer)
     }
 }
